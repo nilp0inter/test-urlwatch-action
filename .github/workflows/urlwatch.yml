@@ -8,7 +8,7 @@ on:
 permissions:
   actions: read
   contents: write
-  pull-requests: write
+  issues: write
 
 jobs:
   urlwatch:
@@ -68,12 +68,15 @@ jobs:
           name: urlwatch-cache
           path: ~/.cache/urlwatch/cache.db
 
-      # Instead of creating a pull request, create a new Issue with the output.
       - name: Create Issue if changes detected
         if: ${{ steps.run-urlwatch.outputs.output != '' }}
-        uses: peter-evans/create-issue@v3
+        uses: actions/github-script@v6
         with:
-          title: 'Updates detected by urlwatch'
-          body: ${{ steps.run-urlwatch.outputs.output }}
-          labels: |
-            urlwatch
+          script: |
+            const output = `${{ steps.run-urlwatch.outputs.output }}`;
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: 'Updates detected by urlwatch',
+              body: output
+            });

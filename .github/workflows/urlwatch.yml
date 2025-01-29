@@ -68,11 +68,12 @@ jobs:
           name: urlwatch-cache
           path: ~/.cache/urlwatch/cache.db
 
-      - name: Create Pull Request if changes detected
+      # Instead of creating a pull request, create a new Issue with the output.
+      - name: Create Issue if changes detected
         if: ${{ steps.run-urlwatch.outputs.output != '' }}
-        uses: peter-evans/create-pull-request@v5
+        uses: peter-evans/create-issue@v3
         with:
           title: 'Updates detected by urlwatch'
           body: ${{ steps.run-urlwatch.outputs.output }}
-          branch: urlwatch-updates
-          commit-message: 'Apply updates from urlwatch monitoring'
+          labels: |
+            urlwatch

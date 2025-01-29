@@ -28,6 +28,7 @@ jobs:
       - name: Get last successful run ID
         id: last-run
         uses: actions/github-script@v6
+        continue-on-error: true
         with:
           script: |
             const response = await github.rest.actions.listWorkflowRuns({

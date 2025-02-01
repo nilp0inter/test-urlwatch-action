@@ -20,5 +20,5 @@ jobs:
           cache-name: 'urlwatch-cache'
           create-issue: true
           issue-header: 'New official releases available 🎉'
-          issue-tags: 'upstream,update
+          issue-tags: 'upstream,update'
           token: ${{ secrets.GITHUB_TOKEN }}

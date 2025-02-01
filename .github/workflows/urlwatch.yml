@@ -13,7 +13,7 @@ jobs:
   monitor:
     runs-on: ubuntu-latest
     steps:
-      - uses: nilp0inter/urlwatch-action
+      - uses: nilp0inter/urlwatch-action@main
         with:
           config-dir: '.github/urlwatch'
           cache-name: 'website-monitor-state'

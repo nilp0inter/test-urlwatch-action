@@ -2,7 +2,7 @@ display:
   empty-diff: true
   error: true
   new: true
-  unchanged: false
+  unchanged: true
 job_defaults:
   all: {}
   browser: {}

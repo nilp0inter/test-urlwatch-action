@@ -27,7 +27,7 @@ jobs:
     steps:
       - name: Monitor ${{ matrix.owner }}/${{ matrix.repo }}/${{ matrix.object }}
         id: monitor
-        uses: nilp0inter/urlwatch-action@main
+        uses: nilp0inter/urlwatch-action@v0.1.0
         with:
           cache-name: 'urlwatch-cache-${{ matrix.owner }}-${{ matrix.repo }}-${{ matrix.object }}'
           token: ${{ secrets.GITHUB_TOKEN }}

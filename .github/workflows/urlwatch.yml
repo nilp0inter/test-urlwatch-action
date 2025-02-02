@@ -11,6 +11,7 @@ permissions:
 
 jobs:
   monitor:
+    name: Monitor ${{ matrix.owner }}/${{ matrix.repo }}/${{ matrix.object }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -48,5 +49,5 @@ jobs:
               repo: context.repo.repo,
               title: '${{ matrix.owner }}/${{ matrix.repo }}: Detected changes in ${{ matrix.object }}',
               body: `# Detected changes in ${{ matrix.object }}\n\n${process.env.DETECTED_CHANGES}`,
-              labels: 'upstream,update'
+              labels: ['upstream', 'update']
             });

@@ -12,13 +12,26 @@ permissions:
 jobs:
   monitor:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        object:
+          - tags
+          - branches
+        repo:
+          - ctt-gob-es/clienteafirma
+          - ctt-gob-es/clienteafirma-external
+          - ctt-gob-es/jmulticard
     steps:
       - run: env
-      - uses: nilp0inter/urlwatch-action@c6c3195cc0f38420d84a4ec9ad541f9a25114baa # v0.0.2
+      - uses: nilp0inter/urlwatch-action@main
         with:
-          config-dir: '.github/urlwatch'
-          cache-name: 'urlwatch-cache'
-          create-issues: true
-          issue-header: 'New official releases available 🎉'
+          cache-name: 'urlwatch-cache-${{ matrix.repo }}-${{ matrix.object }}'
+          create-issue: true
+          issue-header: 'New entry of type ${{ matrix.object }} in ${{ matrix.repo }}'
           issue-tags: 'upstream,update'
           token: ${{ secrets.GITHUB_TOKEN }}
+          urls: |
+            url: https://api.github.com/repos/${{ matrix.repo }}/${{ matrix.object }}
+            filter:
+              - jq: '.[] | .name'
+              - sort:

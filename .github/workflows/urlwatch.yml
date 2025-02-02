@@ -17,21 +17,23 @@ jobs:
         object:
           - tags
           - branches
+        owner:
+          - ctt-gob-es
         repo:
-          - ctt-gob-es/clienteafirma
-          - ctt-gob-es/clienteafirma-external
-          - ctt-gob-es/jmulticard
+          - clienteafirma
+          - clienteafirma-external
+          - jmulticard
     steps:
       - run: env
       - uses: nilp0inter/urlwatch-action@main
         with:
-          cache-name: 'urlwatch-cache-${{ matrix.repo }}-${{ matrix.object }}'
+          cache-name: 'urlwatch-cache-${{ matrix.owner }}-${{ matrix.repo }}-${{ matrix.object }}'
           create-issue: true
-          issue-header: 'New entry of type ${{ matrix.object }} in ${{ matrix.repo }}'
+          issue-header: 'New entry of type ${{ matrix.object }} in ${{ matrix.owner }}/${{ matrix.repo }}'
           issue-tags: 'upstream,update'
           token: ${{ secrets.GITHUB_TOKEN }}
           urls: |
-            url: https://api.github.com/repos/${{ matrix.repo }}/${{ matrix.object }}
+            url: https://api.github.com/repos/${{ matrix.owner }}/${{ matrix.repo }}/${{ matrix.object }}
             filter:
               - jq: '.[] | .name'
               - sort:

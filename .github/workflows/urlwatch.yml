@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: env
-      - uses: nilp0inter/urlwatch-action@a934037402d84203813f167abc53c4cce9eae68e # v0.0.1
+      - uses: nilp0inter/urlwatch-action@c6c3195cc0f38420d84a4ec9ad541f9a25114baa # v0.0.2
         with:
           config-dir: '.github/urlwatch'
           cache-name: 'urlwatch-cache'
